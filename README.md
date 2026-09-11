@@ -14,11 +14,6 @@ docker compose up --build
 # ASAA on :8080, benchmark target on :8000
 ```
 
-Point Mode 1 at the bundled benchmark target (`http://127.0.0.1:8000/`) or at a
-real authorised benchmark such as OWASP Juice Shop / DVWA / Metasploitable 2.
-
----
-
 **Mailtrap setup (2 min):** create a free account at mailtrap.io → Email Testing
 → your Inbox → SMTP Settings → copy the host, port, username, and password into
 `.env` (`ASAA_SMTP_HOST/PORT/USER/PASS`). Then use the "Email report" button;
