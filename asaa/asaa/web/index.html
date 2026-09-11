@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASAA Console</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111c30; --panel2:#0f1829; --line:#22304a; --ink:#e6edf7;
+    --muted:#8 da0bd; --muted:#8da0bd; --teal:#14b8a6; --teal2:#0f766e;
+    --crit:#7f1d1d; --high:#dc2626; --med:#d97706; --low:#65a30d; --info:#475569;
+    --accent:#38bdf8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0b1220,#0a0f1c);color:var(--ink);
+    font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line);
+    background:rgba(17,28,48,.7);backdrop-filter:blur(8px);position:sticky;top:0;z-index:5}
+  .logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--teal),var(--accent));
+    display:grid;place-items:center;font-weight:800;color:#04121a}
+  h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
+  header .sub{color:var(--muted);font-size:12px}
+  .pill{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);
+    padding:5px 10px;border-radius:999px}
+  .wrap{display:grid;grid-template-columns:340px 1fr;gap:18px;padding:18px;max-width:1400px;margin:0 auto}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin:0 0 12px}
+  label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px}
+  input,select{width:100%;padding:9px 11px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:9px;color:var(--ink);font-size:13px}
+  .check{display:flex;align-items:center;gap:8px;margin-top:12px;color:var(--ink);font-size:13px}
+  .check input{width:auto}
+  button{cursor:pointer;border:none;border-radius:9px;padding:9px 13px;font-weight:600;font-size:13px;
+    background:var(--teal);color:#04121a;transition:.15s;width:100%}
+  button:hover{filter:brightness(1.08)}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  button.sm{width:auto;padding:6px 11px;font-size:12px}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .tlist{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+  .titem{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);cursor:pointer}
+  .titem.active{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset}
+  .titem .n{font-weight:600}
+  .titem .u{color:var(--muted);font-size:12px;word-break:break-all}
+  .badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:999px;margin-top:6px}
+  .badge.auth{background:rgba(20,184,166,.16);color:#5eead4}
+  .badge.noauth{background:rgba(148,163,184,.14);color:#cbd5e1}
+  .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .empty{color:var(--muted);text-align:center;padding:50px 20px}
+  .sevbar{display:flex;gap:6px;margin:4px 0 14px;flex-wrap:wrap}
+  .sev{font-size:11px;padding:3px 9px;border-radius:999px;font-weight:700}
+  .sev.crit{background:var(--crit);color:#fecaca}.sev.high{background:var(--high);color:#fee2e2}
+  .sev.med{background:var(--med);color:#0b1220}.sev.low{background:var(--low);color:#0b1220}
+  .sev.info{background:var(--info);color:#e2e8f0}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;padding:7px 8px;border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:8px;border-bottom:1px solid #182338;vertical-align:top}
+  .sc{font-weight:700;border-radius:6px;padding:2px 7px;font-size:11px}
+  .tag{display:inline-block;font-size:10.5px;color:#7dd3fc;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:1px 6px;margin:2px 3px 0 0}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{font-size:11.5px;border:1px solid var(--line);border-radius:8px;padding:4px 9px;color:var(--muted)}
+  .chip b{color:var(--ink)}
+  .narr{white-space:pre-wrap;background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:14px;font-size:13px;line-height:1.6;max-height:340px;overflow:auto}
+  .att{margin:10px 0}
+  .toast{position:fixed;bottom:20px;right:20px;background:#0f766e;color:#eafffb;padding:11px 16px;
+    border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:20;opacity:0;transform:translateY(10px);transition:.25s}
+  .toast.show{opacity:1;transform:none}
+  .toast.deny{background:#7f1d1d;color:#fee2e2}
+  .audit{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
+  .audit td{padding:6px 8px}
+  .ok{color:#5eead4}.deny{color:#fca5a5}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .verify{font-size:12px;padding:6px 10px;border-radius:8px;margin-top:10px}
+  .verify.good{background:rgba(20,184,166,.14);color:#5eead4}
+  .verify.bad{background:var(--crit);color:#fecaca}
+  .spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#04121a;border-radius:50%;animation:s .7s linear infinite;vertical-align:-2px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .tab{font-size:12px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;color:var(--muted)}
+  .tab.active{background:var(--panel2);color:var(--ink);border-color:var(--teal)}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">A</div>
+  <div>
+    <h1>ASAA — Autonomous Security Assessment Agent</h1>
+    <div class="sub">Sovereign web &amp; application security assessment · academic prototype</div>
+  </div>
+  <div class="pill" id="health">connecting…</div>
+</header>
+
+<div class="wrap">
+  <!-- LEFT COLUMN -->
+  <div>
+    <div class="card">
+      <h2>Register target (UC-1)</h2>
+      <label>Name</label><input id="t-name" placeholder="Juice Shop (benchmark)">
+      <label>URL</label><input id="t-url" placeholder="http://localhost:3000">
+      <label>Owner email</label><input id="t-email" placeholder="owner@example.sa">
+      <label>Written authorisation document (PDF/PNG/JPG) — enables Mode 2 &amp; 3</label>
+      <input type="file" id="t-authfile" accept=".pdf,.png,.jpg,.jpeg">
+      <div style="font-size:11px;color:var(--muted);margin-top:6px">
+        The file is SHA-256 hashed and stored as tamper-evident evidence. Leave empty for a Mode 1-only target.</div>
+      <div style="height:12px"></div>
+      <button onclick="createTarget()">Add target</button>
+    </div>
+
+    <div class="card">
+      <h2>Targets</h2>
+      <div class="tlist" id="targets"></div>
+    </div>
+
+    <div class="card">
+      <h2>CVE monitoring (UC-5)</h2>
+      <div class="chips" id="cve-status"></div>
+      <button class="ghost" onclick="runMonitor()">Run monitoring sweep</button>
+      <div id="alerts" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div>
+    <div class="card">
+      <div class="row">
+        <h2 style="margin:0" id="panel-title">Assessment console</h2>
+        <div style="margin-left:auto" class="row" id="mode-actions"></div>
+      </div>
+      <div id="tech" class="chips" style="margin-top:14px"></div>
+      <div class="tabs" id="tabs"></div>
+      <div id="panel"><div class="empty">Select or register a target, then run Mode 1.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="row"><h2 style="margin:0">Audit log (NFR-S-4 · ECC 2-12)</h2>
+        <button class="ghost sm" style="margin-left:auto" onclick="verifyChain()">Verify hash chain</button>
+        <button class="ghost sm" onclick="loadAudit()">Refresh</button>
+      </div>
+      <div id="verify"></div>
+      <div style="max-height:280px;overflow:auto;margin-top:10px">
+        <table class="audit"><thead><tr><th>#</th><th>Actor</th><th>Action</th><th>Status</th><th>Detail</th><th>Hash</th></tr></thead>
+        <tbody id="audit"></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<input type="file" id="authfile-hidden" accept=".pdf,.png,.jpg,.jpeg" style="display:none">
+<script src="/static/app.js"></script>
+</body>
+</html>

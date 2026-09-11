@@ -1,0 +1,15 @@
+fastapi==0.141.1
+uvicorn[standard]==0.46.0
+SQLAlchemy==2.0.52
+Jinja2==3.1.6
+reportlab==4.4.10
+httpx==0.28.1
+python-multipart==0.0.26
+arabic-reshaper==3.0.1
+python-bidi==0.6.11
+ASAA_SMTP_HOST=sandbox.smtp.mailtrap.io
+ASAA_SMTP_PORT=587
+ASAA_SMTP_USER=1d4d2e7c46781b
+ASAA_SMTP_PASS=7efd9850ee6fb7
+ASAA_SMTP_FROM=asaa-noreply@asaa.local
+ASAA_SMTP_TLS=true

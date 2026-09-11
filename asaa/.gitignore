@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+asaa/asaa.db
+asaa/reports/*.pdf
+asaa/data/auth_docs/
+docs/*.png
+.env

@@ -1,0 +1,34 @@
+# ASAA reference deployment (Ch.5 5.2, single-command bring-up per NFR).
+# The academic prototype defaults to SQLite inside the app container. Uncomment
+# the postgres service and ASAA_DATABASE_URL to run the Ch.5 Postgres topology.
+services:
+  asaa:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      ASAA_REASONING_PROVIDER: "auto"
+      ASAA_CVE_THRESHOLD: "7.0"
+      # ASAA_DATABASE_URL: "postgresql+psycopg://asaa:asaa@postgres:5432/asaa"
+      # ASAA_HUMAIN_API_BASE: ""
+      # ASAA_HUMAIN_API_KEY: ""
+    restart: unless-stopped
+
+  # Optional benchmark target so the whole flow runs without an external app.
+  target:
+    build: .
+    command: ["python", "scripts/mock_target.py", "8000"]
+    ports:
+      - "8000:8000"
+
+  # postgres:
+  #   image: postgres:16
+  #   environment:
+  #     POSTGRES_USER: asaa
+  #     POSTGRES_PASSWORD: asaa
+  #     POSTGRES_DB: asaa
+  #   volumes:
+  #     - asaa_pg:/var/lib/postgresql/data
+
+# volumes:
+#   asaa_pg:

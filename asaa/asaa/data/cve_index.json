@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "description": "ASAA local CVE index. Real NVD records for the stacks exposed by the benchmark targets (DVWA, OWASP Juice Shop, Metasploitable 2) and common Saudi web deployments. Refreshed by services.cve.sync_from_nvd() when the NVD feed is reachable.",
+    "source": "National Vulnerability Database (NVD), nvd.nist.gov",
+    "snapshot_date": "2026-05-01"
+  },
+  "cves": [
+    {
+      "cve_id": "CVE-2021-41773",
+      "cvss": 7.5,
+      "published": "2021-10-05",
+      "description": "A path traversal and file disclosure vulnerability in Apache HTTP Server 2.4.49 allows attackers to map URLs to files outside the expected document root and, where CGI is enabled, achieve remote code execution.",
+      "affected": [{"vendor": "apache", "product": "http_server", "ranges": [{"exact": "2.4.49"}]}]
+    },
+    {
+      "cve_id": "CVE-2021-42013",
+      "cvss": 9.8,
+      "published": "2021-10-07",
+      "description": "Incomplete fix for CVE-2021-41773 in Apache HTTP Server 2.4.49 and 2.4.50 allows path traversal and remote code execution when CGI scripts are enabled.",
+      "affected": [{"vendor": "apache", "product": "http_server", "ranges": [{"introduced": "2.4.49", "lte": "2.4.50"}]}]
+    },
+    {
+      "cve_id": "CVE-2019-0211",
+      "cvss": 7.8,
+      "published": "2019-04-08",
+      "description": "Apache HTTP Server 2.4.17 to 2.4.38 privilege escalation from a less-privileged child process to the parent process via scoreboard manipulation.",
+      "affected": [{"vendor": "apache", "product": "http_server", "ranges": [{"introduced": "2.4.17", "lte": "2.4.38"}]}]
+    },
+    {
+      "cve_id": "CVE-2013-2028",
+      "cvss": 7.5,
+      "published": "2013-05-20",
+      "description": "Stack-based buffer overflow in nginx 1.3.9 through 1.4.0 allows remote attackers to cause a denial of service or execute arbitrary code via a crafted chunked Transfer-Encoding request.",
+      "affected": [{"vendor": "nginx", "product": "nginx", "ranges": [{"introduced": "1.3.9", "lte": "1.4.0"}]}]
+    },
+    {
+      "cve_id": "CVE-2019-20372",
+      "cvss": 5.3,
+      "published": "2020-01-09",
+      "description": "nginx before 1.17.7 with error_page requests permits HTTP request smuggling in certain configurations.",
+      "affected": [{"vendor": "nginx", "product": "nginx", "ranges": [{"lt": "1.17.7"}]}]
+    },
+    {
+      "cve_id": "CVE-2019-11043",
+      "cvss": 9.8,
+      "published": "2019-10-28",
+      "description": "Buffer underflow in PHP-FPM (PHP 7.1.x-7.3.x) with certain nginx configurations allows remote code execution via a crafted URL path.",
+      "affected": [{"vendor": "php", "product": "php", "ranges": [{"introduced": "7.1.0", "lt": "7.3.11"}]}]
+    },
+    {
+      "cve_id": "CVE-2018-10547",
+      "cvss": 6.1,
+      "published": "2018-04-29",
+      "description": "Reflected cross-site scripting in the PHP phpinfo output and related components in PHP before 5.6.36, 7.0.x before 7.0.30, 7.1.x before 7.1.17, and 7.2.x before 7.2.5.",
+      "affected": [{"vendor": "php", "product": "php", "ranges": [{"lt": "7.2.5"}]}]
+    },
+    {
+      "cve_id": "CVE-2020-11022",
+      "cvss": 6.1,
+      "published": "2020-04-29",
+      "description": "In jQuery versions greater than or equal to 1.2 and before 3.5.0, passing HTML containing <option> elements from untrusted sources to a jQuery DOM manipulation method may execute untrusted code (cross-site scripting).",
+      "affected": [{"vendor": "jquery", "product": "jquery", "ranges": [{"introduced": "1.2.0", "lt": "3.5.0"}]}]
+    },
+    {
+      "cve_id": "CVE-2020-11023",
+      "cvss": 6.1,
+      "published": "2020-04-29",
+      "description": "In jQuery versions greater than or equal to 1.0.3 and before 3.5.0, passing HTML containing <option> elements from untrusted sources to a jQuery manipulation method may execute untrusted code.",
+      "affected": [{"vendor": "jquery", "product": "jquery", "ranges": [{"introduced": "1.0.3", "lt": "3.5.0"}]}]
+    },
+    {
+      "cve_id": "CVE-2019-11358",
+      "cvss": 6.1,
+      "published": "2019-04-20",
+      "description": "jQuery before 3.4.0 mishandles jQuery.extend(true, {}, ...) so that an Object.prototype pollution attack is possible, enabling cross-site scripting.",
+      "affected": [{"vendor": "jquery", "product": "jquery", "ranges": [{"lt": "3.4.0"}]}]
+    },
+    {
+      "cve_id": "CVE-2019-8331",
+      "cvss": 6.1,
+      "published": "2019-02-20",
+      "description": "In Bootstrap before 3.4.1 and 4.3.x before 4.3.1, cross-site scripting is possible in the tooltip or popover data-template attribute.",
+      "affected": [{"vendor": "getbootstrap", "product": "bootstrap", "ranges": [{"lt": "3.4.1"}]}]
+    },
+    {
+      "cve_id": "CVE-2018-14041",
+      "cvss": 6.1,
+      "published": "2018-07-13",
+      "description": "In Bootstrap before 4.1.2, cross-site scripting is possible in the data-target property of scrollspy.",
+      "affected": [{"vendor": "getbootstrap", "product": "bootstrap", "ranges": [{"lt": "4.1.2"}]}]
+    },
+    {
+      "cve_id": "CVE-2018-7600",
+      "cvss": 9.8,
+      "published": "2018-03-28",
+      "description": "Drupal before 7.58, 8.3.x before 8.3.9, 8.4.x before 8.4.6, and 8.5.x before 8.5.1 (Drupalgeddon2) allows remote attackers to execute arbitrary code via a crafted request due to insufficient input sanitisation on Form API AJAX requests.",
+      "affected": [{"vendor": "drupal", "product": "drupal", "ranges": [{"lt": "7.58"}]}]
+    },
+    {
+      "cve_id": "CVE-2014-3704",
+      "cvss": 9.8,
+      "published": "2014-10-15",
+      "description": "The expandArguments function in the database abstraction API in Drupal 7.x before 7.32 (Drupalgeddon) allows SQL injection and remote code execution via crafted keys in an array.",
+      "affected": [{"vendor": "drupal", "product": "drupal", "ranges": [{"lt": "7.32"}]}]
+    },
+    {
+      "cve_id": "CVE-2022-21661",
+      "cvss": 8.0,
+      "published": "2022-01-06",
+      "description": "WordPress before 5.8.3 is affected by SQL injection via WP_Query due to improper sanitisation in some plugins and themes.",
+      "affected": [{"vendor": "wordpress", "product": "wordpress", "ranges": [{"lt": "5.8.3"}]}]
+    },
+    {
+      "cve_id": "CVE-2017-5487",
+      "cvss": 5.3,
+      "published": "2017-01-14",
+      "description": "wp-json/wp/v2/users in WordPress before 4.7.1 allows remote attackers to enumerate usernames via a REST API request.",
+      "affected": [{"vendor": "wordpress", "product": "wordpress", "ranges": [{"lt": "4.7.1"}]}]
+    },
+    {
+      "cve_id": "CVE-2014-6271",
+      "cvss": 9.8,
+      "published": "2014-09-24",
+      "description": "GNU Bash through 4.3 (Shellshock) processes trailing strings after function definitions in environment variables, allowing remote code execution via crafted environments, exploitable through CGI.",
+      "affected": [{"vendor": "gnu", "product": "bash", "ranges": [{"lte": "4.3"}]}]
+    },
+    {
+      "cve_id": "CVE-2014-0160",
+      "cvss": 7.5,
+      "published": "2014-04-07",
+      "description": "The TLS heartbeat extension in OpenSSL 1.0.1 before 1.0.1g (Heartbleed) allows remote attackers to read process memory and disclose private keys via crafted heartbeat packets.",
+      "affected": [{"vendor": "openssl", "product": "openssl", "ranges": [{"introduced": "1.0.1", "lt": "1.0.1g"}]}]
+    },
+    {
+      "cve_id": "CVE-2021-44228",
+      "cvss": 10.0,
+      "published": "2021-12-10",
+      "description": "Apache Log4j2 2.0-beta9 through 2.15.0 (Log4Shell) JNDI features do not protect against attacker-controlled LDAP endpoints, allowing remote code execution via crafted log messages.",
+      "affected": [{"vendor": "apache", "product": "log4j", "ranges": [{"introduced": "2.0", "lt": "2.16.0"}]}]
+    }
+  ]
+}
